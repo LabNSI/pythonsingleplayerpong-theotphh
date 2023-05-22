@@ -74,19 +74,19 @@ while not end:
 
         if key[pygame.K_LEFT]:
             print("Key LEFT pressed")
-            x -= radius
+            x -= speed
 
         if key[pygame.K_UP]:
             print("Key UP pressed")
-            y -=radius
+            y -=speed
 
         if key[pygame.K_RIGHT]:
             print("Key RIGHT pressed")
-            x += radius
+            x += speed
 
         if key[pygame.K_DOWN]:
             print("Key DOWN pressed")
-            y +=radius
+            y +=speed
 
     else:
         # if the circle touches the right and left edges
@@ -100,8 +100,8 @@ while not end:
             y_sens = y_sens*-1
 
         # compute new coordonates
-        x = x + radius*x_sens
-        y = y + radius*y_sens
+        x = x + speed*x_sens
+        y = y + speed*y_sens
 
 
     pygame.draw.circle(screen, WHITE, (x, y), radius)

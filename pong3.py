@@ -35,16 +35,23 @@ while not end:
     key = pygame.key.get_pressed()
     if key[pygame.K_a]:
         # up left corner
-      x -= 1
+      x -= radius
+      y -=radius
+
     if key[pygame.K_d]:
         # up right corner
-      x += 1
+      x += radius
+      y -=radius
+
     if key[pygame.K_s]:
         # down left corner
-      y +=1
+      x -= radius
+      y +=radius
     if key[pygame.K_w]:
         # down left corner
-      y -=1
+
+      x += radius
+      y +=radius
 
 
     # redraw circle at new position

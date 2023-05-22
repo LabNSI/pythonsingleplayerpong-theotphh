@@ -2,11 +2,11 @@ import pygame
 
 pygame.init()
 
-WIDTH = 300
-HEIGHT = 200
+WIDTH = 600
+HEIGHT = 400
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 
-pygame.display.set_caption('My Game')
+pygame.display.set_caption('My Single Player Pong')
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -15,7 +15,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 255)
 
-screen.fill(RED)
+screen.fill(BLACK)
 pygame.display.update()
 
 radius = 25
@@ -30,7 +30,7 @@ auto = True
 
 end = False
 while not end:
-    screen.fill(RED)
+    screen.fill(BLACK)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             end = True
@@ -40,12 +40,12 @@ while not end:
     if key[pygame.K_o]:
         print("Key O pressed")
         print("Mode Auto")
-        auto = ___
+        auto = True
 
     if key[pygame.K_m]:
         print("Key M pressed")
         print("Mode Manuel")
-        auto = ___
+        auto = False
 
     if not auto:
         # Manual mode :
@@ -72,36 +72,36 @@ while not end:
             x = WIDTH - radius
             y = HEIGHT - radius
 
-        if key[pygame.K_UP]:
-            print("Key UP pressed")
-            ???
-
-        if key[pygame.K_DOWN]:
-            print("Key DOWN pressed")
-            ???
-
         if key[pygame.K_LEFT]:
             print("Key LEFT pressed")
-            ???
+            x -= radius
+
+        if key[pygame.K_UP]:
+            print("Key UP pressed")
+            y -=radius
 
         if key[pygame.K_RIGHT]:
             print("Key RIGHT pressed")
-            ???
+            x += radius
+
+        if key[pygame.K_DOWN]:
+            print("Key DOWN pressed")
+            y +=radius
 
     else:
         # if the circle touches the right and left edges
         # reverse direction on x-axis
-        if ____:
-            x_sens = ____
+        if x == 0 or x == WIDTH:
+            x_sens = x_sens*-1
 
         # if the circle touches the lower and upper edges
         # reverse direction on y-axis
-        if ___:
-            y_sens = ___
+        if y == 0 or y == HEIGHT:
+            y_sens = y_sens*-1
 
         # compute new coordonates
-        x = x + ___
-        y = y + ___
+        x = x + radius*x_sens
+        y = y + radius*y_sens
 
 
     pygame.draw.circle(screen, WHITE, (x, y), radius)

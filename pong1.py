@@ -2,11 +2,11 @@ import pygame
 
 pygame.init()
 
-WIDTH = 300
-HEIGHT = 200
+WIDTH = 600
+HEIGHT = 400
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 
-pygame.display.set_caption('My Game')
+pygame.display.set_caption('My Single Player Pong')
 
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
@@ -15,7 +15,7 @@ GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 255)
 
-SCREEN.fill(RED)
+SCREEN.fill(BLACK)
 pygame.display.update()
 
 end = False

@@ -19,14 +19,14 @@ screen.fill(BLACK)
 pygame.display.update()
 
 radius = 25
-x = WIDTH//2
-y = HEIGHT//2
-pygame.draw.circle(screen, WHITE, (x, y), radius)  # Position is the center of the circle.
+x = WIDTH // 2
+y = HEIGHT // 2
+pygame.draw.circle(screen, WHITE, (x, y),
+                   radius)  # Position is the center of the circle.
 
-speed = 1
+speed = 10
 x_sens = y_sens = 1
 auto = True
-
 
 end = False
 while not end:
@@ -38,7 +38,7 @@ while not end:
     key = pygame.key.get_pressed()
 
     if key[pygame.K_o]:
-        print("Key O pressed")
+        print("Key O ressed")
         print("Mode Auto")
         auto = True
 
@@ -78,7 +78,7 @@ while not end:
 
         if key[pygame.K_UP]:
             print("Key UP pressed")
-            y -=speed
+            y -= speed
 
         if key[pygame.K_RIGHT]:
             print("Key RIGHT pressed")
@@ -86,23 +86,22 @@ while not end:
 
         if key[pygame.K_DOWN]:
             print("Key DOWN pressed")
-            y +=speed
+            y += speed
 
     else:
         # if the circle touches the right and left edges
         # reverse direction on x-axis
         if x == 0 or x == WIDTH:
-            x_sens = x_sens*-1
+            x_sens = x_sens * -1
 
         # if the circle touches the lower and upper edges
         # reverse direction on y-axis
         if y == 0 or y == HEIGHT:
-            y_sens = y_sens*-1
+            y_sens = y_sens * -1
 
         # compute new coordonates
-        x = x + speed*x_sens
-        y = y + speed*y_sens
-
+        x = x + speed * x_sens
+        y = y + speed * y_sens
 
     pygame.draw.circle(screen, WHITE, (x, y), radius)
 

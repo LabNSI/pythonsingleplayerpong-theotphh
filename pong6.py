@@ -21,44 +21,111 @@ myfont = pygame.font.SysFont('monospace', 50)
 print("pong6")
 screen.fill(BLACK)
 title = myfont.render("Single Player Pong:", False, GREEN)
-screen.blit(title, (WIDTH // 2 - title.get_width() // 2, HEIGHT // 2 - title.get_height() * 2))
+screen.blit(title, (WIDTH // 2 - title.get_width() // 2,
+                    HEIGHT // 2 - title.get_height() * 2))
 pygame.display.update()
 pygame.time.delay(1000)
 
 # countdown before start game
 # loop from 3 to 0 and write the number in the middle of the screen
-???
+for i in range(4):
+    print(i)
 
+    timer = myfont.render(str(3 - i), False, RED)
+    pygame.draw.rect(screen, BLACK,
+                     (WIDTH // 2 - timer.get_width() // 2,
+                      HEIGHT // 2 - timer.get_height() * 1, 50,
+                      50))  #cela enleve les précedent nombres de timer
+
+    screen.blit(timer, (WIDTH // 2 - timer.get_width() // 2,
+                        HEIGHT // 2 - timer.get_height() * 1))
+    pygame.display.update()
+
+    pygame.time.delay(1000)
 
 radius = 10
-x = WIDTH//2
-y = radius
+x = WIDTH // 2
+y = radius * 1.5
 score = 0
 
-pygame.draw.circle(screen, WHITE, (x, y), radius)  # Position is the center of the circle.
+pygame.draw.circle(screen, WHITE, (x, y),
+                   radius)  # Position is the center of the circle.
 
-
-paddle = { "width" : 200,
-           "height": 20,
-           "color" : BLUE,
-           "x"     : 0,
-           "y"     : HEIGHT}
-paddle["x"] = WIDTH//2 - paddle["width"]//2
+paddle = {"width": 200, "height": 20, "color": BLUE, "x": 0, "y": HEIGHT}
+paddle["x"] = WIDTH // 2 - paddle["width"] // 2
 paddle["y"] = HEIGHT - paddle["height"]
-pygame.draw.rect(screen, paddle["color"], (paddle["x"], paddle["y"], paddle["width"], paddle["height"]))
+pygame.draw.rect(screen, paddle["color"],
+                 (paddle["x"], paddle["y"], paddle["width"], paddle["height"]))
 
-speed = 5
+speed = 10
 x_sens = y_sens = 1
 pause = False
 
 end = False
 while not end:
     screen.fill(BLACK)
-    # Control the game
+    ScoreDiplay = myfont.render("Score : "+str(score), False, GREEN)
+    screen.blit(ScoreDiplay, (0,0))
+  # Control the game
     # Past your code from pong5.py
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            end = True
 
+        key = pygame.key.get_pressed()
+
+        if key[pygame.K_SPACE]:
+            pause = True
+
+        if key[pygame.K_RETURN]:
+            pause = False
+
+        if key[pygame.K_m]:
+            auto = False
+
+    if not pause:
+        if key[pygame.K_LEFT] and paddle["x"] >= 0:
+            print("Key LEFT pressed")
+            paddle["x"] -= speed
+
+        if key[pygame.K_RIGHT] and paddle["x"] + paddle["width"] <= WIDTH:
+            print("Key RIGHT pressed")
+            paddle["x"] += speed
+
+        # change x direction if the ball hits the left or right edge
+
+        if x <= 0 + radius or x >= WIDTH - radius:
+            x_sens = x_sens * -1
+        # change y direction if the ball hits the top edge
+        if y <= 0 + radius:
+            y_sens = y_sens * -1
+
+        # if the ball hits the paddle top
+
+    # if the ball is between the x paddle begin and the x paddle end
+    #     ???
+    # change y direction
+    #        ???
+        if y >= paddle["y"] - paddle["height"] / 2 and x >= paddle["x"] and x <= paddle["x"] + paddle["width"]:
+            y_sens *= -1
+            score+=1
+          
+            
+            pygame.display.update()      
+    # if the ball comes out of the screen from below, end the game
+    # ???
+        if y >= HEIGHT - radius:
+            end = True
+
+    # compute the new ball coordinates
+        x = x + x_sens * speed
+        y = y + y_sens * speed
+
+    # redraw ball and paddle
     pygame.draw.circle(screen, WHITE, (x, y), radius)
-    pygame.draw.rect(screen, paddle["color"], (paddle["x"], paddle["y"], paddle["width"], paddle["height"]))
+    pygame.draw.rect(
+        screen, paddle["color"],
+        (paddle["x"], paddle["y"], paddle["width"], paddle["height"]))
 
     # Display the score in position (10, 0) (top left on the screen)
 

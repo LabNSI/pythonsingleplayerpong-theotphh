@@ -1,5 +1,5 @@
 language = "python3"
-entrypoint = "pong5.py"
+entrypoint = "pong6.py"
 hidden = ["venv", ".config", "**/__pycache__", "**/.mypy_cache", "**/*.pyc"]
 
 audio = true
